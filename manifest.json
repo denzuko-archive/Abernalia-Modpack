@@ -1,0 +1,19 @@
+{
+  "minecraft": {
+    "version": "1.12.2",
+    "modLoaders": [
+      {
+        "id": "forge-14.23.5.2838",
+        "primary": true
+      }
+    ]
+  },
+  "manifestType": "minecraftModpack",
+  "manifestVersion": 1,
+  "name": "Abernalia",
+  "version": "1.0.0",
+  "author": "CoolCat430",
+  "icon": "https://raw.githubusercontent.com/AranaiRa/ArcaneArchives/master/marketing/curseforge/brazier.png",
+  "files": [],
+  "overrides": "overrides"
+}
