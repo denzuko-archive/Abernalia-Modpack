@@ -1,0 +1,66 @@
+---
+version: "3.7"
+
+volumes:
+  mc-data:
+
+networks:
+  default:
+    external: true
+    name: 'public'
+
+services:
+  minecraft-server:
+    ports:
+      - "25565:25565"
+
+    environment:
+      EULA: 'true'
+      VERSION: 1.12.2
+      DIFFICULTY: normal
+      WHITELIST: zekodun,denzuko
+      OPS: zekodun
+      TYPE: FORGE
+      GENERIC_PACK: https://github.com/denzuko/Abernalia-Modpack/archive/0.0.1.zip
+      ALLOW_NETHER: 'true'
+      ANNOUNCE_PLAYER_ACHIEVEMENTS: "true"
+      ENABLE_COMMAND_BLOCK: "true"
+      FORCE_GAMEMODE: "true"
+      GENERATE_STRUCTURES: "true"
+      SPAWN_ANIMALS: "true"
+      SPAWN_MONSTERS: "true"
+      SPAWN_NPCS: "true"
+      MODE: "survival"
+      PVP: "false"
+      SEED: 4031384495743822299
+      ENABLE_QUERY: "true"
+      VIEW_DISTANCE: "10"
+      MEMORY: "3G"
+      MAX_MEMORY: "3G"
+      INIT_MEMORY: "512m"
+      GUI: "FALSE"
+      CONSOLE: "FALSE"
+
+    networks:
+      - default
+
+    image: itzg/minecraft-server:latest
+    tty: true
+    stdin_open: true
+    shm_size: 128M
+    healthcheck:
+      test: ['CMD', 'mcstatus', 'localhost:25565','ping']
+      interval: 10m
+      timeout: 10s
+      retries: 3
+      start_period: 10m
+    deploy:
+      resources:
+        limits:
+          memory: 3.5G
+      restart_policy:
+        condition: on-failure
+    volumes:
+      - mc-data:/data
+
+...
